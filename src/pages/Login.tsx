@@ -23,7 +23,8 @@ const Login = () => {
             showToast('warn', 'Contraseña muy corta', 'La contraseña debe tener al menos 6 caracteres.');
             return; 
         }
-        const success = await login(username, password);
+        const payload = {email: username, password};
+        const success = await login(payload);
         if (success) {
             navigate("/dashboard");
         }
