@@ -3,11 +3,12 @@ import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { useNavigate } from 'react-router-dom';
+import LogoMenu from '../../../assets/react.svg'
 
 const Header = () => {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const navigate = useNavigate();
-    const isLoggedIn = localStorage.getItem('token');
+    // const isLoggedIn = localStorage.getItem('token');
 
     const items = [
         {
@@ -15,27 +16,27 @@ const Header = () => {
             icon: 'pi pi-home',
             command: () => navigate('/')
         },
-        {
-            label: 'Tours',
-            icon: 'pi pi-map',
-            items: [
-                {
-                    label: 'Destinos Populares',
-                    icon: 'pi pi-star',
-                    command: () => navigate('/popular-destinations')
-                },
-                {
-                    label: 'Próximas Salidas',
-                    icon: 'pi pi-calendar',
-                    command: () => navigate('/upcoming-tours')
-                }
-            ]
-        },
-        {
-            label: 'Experiencias',
-            icon: 'pi pi-compass',
-            command: () => navigate('/experiences')
-        },
+        // {
+        //     label: 'Tours',
+        //     icon: 'pi pi-map',
+        //     items: [
+        //         {
+        //             label: 'Destinos Populares',
+        //             icon: 'pi pi-star',
+        //             command: () => navigate('/popular-destinations')
+        //         },
+        //         {
+        //             label: 'Próximas Salidas',
+        //             icon: 'pi pi-calendar',
+        //             command: () => navigate('/upcoming-tours')
+        //         }
+        //     ]
+        // },
+        // {
+        //     label: 'Experiencias',
+        //     icon: 'pi pi-compass',
+        //     command: () => navigate('/experiences')
+        // },
         {
             label: 'Sobre Nosotros',
             icon: 'pi pi-users',
@@ -49,20 +50,22 @@ const Header = () => {
     ];
 
     const start = (
-        <div className="flex align-items-center gap-2">
+        <div className="flex align-items-center gap-2 pr-2">
             <img 
                 alt="logo" 
-                src="https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                src={LogoMenu} 
                 height="40" 
                 className="mr-2 border-round-lg"
             />
-            <span className="text-xl font-bold text-900 hidden md:block">TourApp</span>
+            <span className="text-xl font-bold text-900 hidden md:block">Prime Front</span>
         </div>
     );
 
     const end = (
         <div className="flex align-items-center gap-2">
-            {isLoggedIn ? (
+            <Button label="Iniciar Sesión" icon="pi pi-sign-in" className="p-button-outlined" onClick={() => navigate('/login')}
+            />
+            {/* {isLoggedIn ? (
                 <>
                     <Button 
                         icon="pi pi-user" 
@@ -93,7 +96,7 @@ const Header = () => {
                         onClick={() => navigate('/register')}
                     />
                 </>
-            )}
+            )} */}
         </div>
     );
 

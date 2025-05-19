@@ -1,7 +1,7 @@
 const Product = () => {
   return (
     <>
-        <div className="surface-0 text-center">
+        <div className="surface-100 text-center py-6">
             <div className="mb-3 font-bold text-3xl">
                 <span className="text-900">One Product, </span>
                 <span className="text-blue-600">Many Solutions</span>

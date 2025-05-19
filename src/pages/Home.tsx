@@ -13,7 +13,6 @@ const Home = () => {
         <CallToAction />
         <Pricing />
         <ContactForm />
-
     </Layout>
   )
 }

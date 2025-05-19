@@ -29,7 +29,7 @@ const ContactForm = () => {
 
   return (
     <>
-        <section className="py-8">
+        <section className="p-6">
             <Toast ref={toast} />
             <div className="container">
             <div className="grid">
@@ -92,7 +92,7 @@ const ContactForm = () => {
                         label={`${loading? 'Enviando...' : "Enviar Mensaje"}`}
                         icon="pi pi-send"
                         className="w-full"
-                        severity="success"
+                        severity="primary"
                         disabled={loading}
                     />
                     </form>
