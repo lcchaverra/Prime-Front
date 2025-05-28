@@ -5,9 +5,10 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { useToast } from '../../../hooks/useToast';
 import { useApiFetch } from '../../../hooks/useApiFetch';
+import { type contactFormData } from '../../../interface/Forms';
 
 const ContactForm = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [formData, setFormData] = useState<contactFormData>({ name: '', email: '', message: '' })
     const { toast, showToast } = useToast();
     const { fetchData, loading } = useApiFetch();
 
@@ -92,7 +93,6 @@ const ContactForm = () => {
                         label={`${loading? 'Enviando...' : "Enviar Mensaje"}`}
                         icon="pi pi-send"
                         className="w-full"
-                        severity="primary"
                         disabled={loading}
                     />
                     </form>
