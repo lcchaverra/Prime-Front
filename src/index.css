@@ -66,3 +66,39 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
+
+/* Estilos para el modo oscuro */
+.dark {
+  color-scheme: dark;
+}
+
+/* Transiciones suaves para el cambio de tema */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
