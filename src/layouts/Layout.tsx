@@ -1,5 +1,5 @@
-import Header from '../components/molecules/Header/Header'
-import Footer from '../components/molecules/Footer/Footer'
+import Header from '../components/ui/Header/Header'
+import Footer from '../components/ui/Footer/Footer'
 
 const Layout = ({ children }) => {
   return (
