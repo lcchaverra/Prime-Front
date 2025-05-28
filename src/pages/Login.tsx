@@ -25,14 +25,21 @@ const Login = () => {
         }
         const payload = {email: username, password};
         const success = await login(payload);
+        console.log(success);
         if (success) {
-            navigate("/dashboard");
+            showToast('success', 'Exitoso', 'Inicio de Sesión exitoso');
+            setTimeout(() => {
+                navigate("/dashboard");
+            }, 3000);
+        }
+        else {
+            showToast('error', 'Error', 'Hubo un problema al iniciar sesión. Intenta nuevamente.');
         }
     };
 
     return (
         <BlockUI blocked={loading}>
-        <div className="bg-gray-100 py-8 px-4 md:px-6 lg:px-8 w-full h-screen">
+        <div className="bg-gray-100 py-8 px-4 md:px-6 lg:px-8 w-screen h-screen">
         <Toast ref={toast} />
         {
             loading ?
