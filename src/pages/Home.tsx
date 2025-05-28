@@ -1,9 +1,9 @@
-import Hero from "../components/molecules/Hero/Hero"
-import Product from "../components/molecules/products/Product"
-import CallToAction from "../components/molecules/CallToAction/CallToAction"
-import Pricing from "../components/molecules/Pricing/Pricing"
-import ContactForm from "../components/molecules/ContactForm/ContactForm"
-import Layout from "../layouts/layout"
+import Hero from "../components/ui/Hero/Hero"
+import Product from "../components/ui/products/Product"
+import CallToAction from "../components/ui/CallToAction/CallToAction"
+import Pricing from "../components/ui/Pricing/Pricing"
+import ContactForm from "../components/ui/ContactForm/ContactForm"
+import Layout from "../layouts/Layout"
 
 const Home = () => {
   return (
