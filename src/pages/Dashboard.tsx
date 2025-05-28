@@ -1,8 +1,11 @@
-import React from 'react'
+import DashboardLayout from "../layouts/DashboardLayout"
+import Welcome from "../components/features/WelcomeDasboard/Welcome"
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <DashboardLayout>
+        <Welcome />
+    </DashboardLayout>
   )
 }
 
