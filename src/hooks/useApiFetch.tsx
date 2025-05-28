@@ -4,10 +4,10 @@ export const useApiFetch = () => {
     const [loading, setLoading] = useState(false);
     const token = localStorage.getItem('token');
 
-    const fetchData = async (endpoint, method = 'GET', body = null, customHeaders = {}) => {
+    const fetchData = async (endpoint: string, method = 'GET', body = null, customHeaders = {}) => {
         setLoading(true);
         try {
-            const isFormData = body instanceof FormData;
+            // const isFormData = body instanceof FormData;
 
             const headers = {
                 "Authorization": `${token}`,
@@ -15,18 +15,19 @@ export const useApiFetch = () => {
             };
 
             // Solo agrega Content-Type si no es FormData
-            if (!isFormData) {
-                headers["Content-Type"] = "application/json";
-            }
+            // if (!isFormData) {
+            //     headers["Content-Type"] = "application/json";
+            // }
 
             const response = await fetch(`${import.meta.env.VITE_API_URL}${endpoint}`, {
                 method,
                 headers,
-                body: body
-                    ? isFormData
-                        ? body
-                        : JSON.stringify(body)
-                    : null,
+                body: body,
+                // body: body
+                //     ? isFormData
+                //         ? body
+                //         : JSON.stringify(body)
+                //     : null,
             });
 
             if (!response.ok) {

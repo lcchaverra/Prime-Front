@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useToast } from './useToast';
-import { type AuthUser, type userData, type user } from '../utils/interface/AuthUser';
-import type { ServiceResponse } from '../utils/types/app';
+import { type AuthUser, type userData, type user } from '../interface/AuthUser';
+import type { ServiceResponse } from '../types/app';
 
 const useAuth = () => {
     const [loading, setLoading] = useState(false);
-    const { showToast } = useToast();
 
     const login = async ({email, password}: AuthUser) => {
         setLoading(true);
@@ -16,15 +14,14 @@ const useAuth = () => {
                 const data: ServiceResponse<userData> = await response.json();
                 localStorage.setItem("token", data.data.token);
                 localStorage.setItem("refreshToken", data.data.refreshToken);
-                showToast('success', 'Exitoso', 'Inicio de Sesión exitoso');
+                localStorage.setItem("user", JSON.stringify(data.data.user));
                 return true;
             } else {
-                showToast('error', 'Error', 'Hubo un problema al iniciar sesión. Intenta nuevamente.');
+                console.error("Error en la solicitud:", response);
                 return false;
             }
         } catch (error) {
             console.error("Error en la solicitud:", error);
-            showToast('error', 'Error', 'Hubo un problema al iniciar sesión. Intenta nuevamente.');
             return false;
         } finally {
             setLoading(false);
