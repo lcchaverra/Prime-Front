@@ -4,10 +4,13 @@ import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { useNavigate } from 'react-router-dom';
 import LogoMenu from '../../../assets/react.svg'
+import { useContext } from 'react';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 
 const Header = () => {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const navigate = useNavigate();
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     // const isLoggedIn = localStorage.getItem('token');
 
     const items = [
@@ -63,8 +66,16 @@ const Header = () => {
 
     const end = (
         <div className="flex align-items-center gap-2">
-            <Button label="Iniciar Sesión" icon="pi pi-sign-in" className="p-button-outlined" onClick={() => navigate('/login')}
+            <Button 
+                icon={isDarkMode ? "pi pi-sun" : "pi pi-moon"}
+                rounded 
+                text 
+                severity="secondary" 
+                onClick={toggleTheme}
+                tooltip={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                tooltipOptions={{ position: 'bottom' }}
             />
+            <Button label="Iniciar Sesión" icon="pi pi-sign-in" className="p-button-outlined" onClick={() => navigate('/login')}/>
             {/* {isLoggedIn ? (
                 <>
                     <Button 
