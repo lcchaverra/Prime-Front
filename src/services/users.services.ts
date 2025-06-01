@@ -6,7 +6,7 @@ export const getUsers = async () => {
         if (data) return data.data || [];
         } catch (error) {
         console.error("Error al obtener los usuarios:", error);
-            return [];
+        throw error;
     }
 };
 
@@ -16,7 +16,7 @@ export const saveUser = async (user: any) => {
         return true;
     } catch (error) {
         console.error("Error al guardar el usuario:", error);
-        return false;
+        throw error;
     }
 };
 
@@ -26,7 +26,7 @@ export const editUser = async (user: any) => {
         return true;
     } catch (error) {
         console.error("Error al editar el usuario:", error);
-        return false;
+        throw error;
     }
 };
 
@@ -36,6 +36,6 @@ export const deleteUser = async (userId: number) => {
         return true;
     } catch (error) {
         console.error("Error al eliminar el usuario:", error);
-        return false;
+        throw error;
     }
 };
