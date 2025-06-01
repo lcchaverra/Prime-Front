@@ -41,7 +41,7 @@ const Login = () => {
                 <Toast ref={toast} />
                 
                 {/* Left side - Login Form */}
-                <div className="flex-none w-full lg:w-5 xl:w-4 bg-white p-6 flex flex-col justify-center align-items-center relative">
+                <div className="flex-none w-full lg:w-5 xl:w-4 surface-0 p-6 flex flex-col justify-center align-items-center relative">
                     {loading ? (
                         <div className="flex align-items-center justify-content-center">
                             <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="4" />

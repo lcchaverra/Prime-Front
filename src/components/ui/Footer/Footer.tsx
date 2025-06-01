@@ -3,8 +3,8 @@ import { InputText } from 'primereact/inputtext';
 
 const Footer = () => {
     return (
-        <footer className="surface-ground">
-            <div className="py-6 px-4">
+        <footer className="bg-primary-100">
+            <div className="p-8">
                 <div className="grid">
                     <div className="col-12 md:col-3">
                         <h3 className="text-xl font-semibold mb-3">TourApp</h3>

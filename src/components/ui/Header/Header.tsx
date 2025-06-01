@@ -113,7 +113,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="card">
+            <div className="card w-full">
                 <Menubar 
                     model={items} 
                     start={start} 

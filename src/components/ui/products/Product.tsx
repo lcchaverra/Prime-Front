@@ -1,13 +1,13 @@
 const Product = () => {
   return (
     <>
-        <div className="surface-100 text-center py-6">
+        <div className="surface-100 text-center py-6 w-full">
             <div className="mb-3 font-bold text-3xl">
                 <span className="text-900">One Product, </span>
                 <span className="text-blue-600">Many Solutions</span>
             </div>
             <div className="text-700 mb-6">Ac turpis egestas maecenas pharetra convallis posuere morbi leo urna.</div>
-            <div className="grid">
+            <div className="grid w-full">
                 <div className="col-12 md:col-4 mb-4 px-5">
                     <span className="p-3 shadow-2 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                         <i className="pi pi-desktop text-4xl text-blue-500"></i>

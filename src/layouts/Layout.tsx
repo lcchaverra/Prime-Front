@@ -1,11 +1,11 @@
 import Header from '../components/ui/Header/Header'
 import Footer from '../components/ui/Footer/Footer'
 
-const Layout = ({ children }) => {
+const Layout = ({ children }:any) => {
   return (
     <>    
         <Header/>
-            <main>
+            <main className='w-full'>
                 {children}
             </main>
         <Footer/>
