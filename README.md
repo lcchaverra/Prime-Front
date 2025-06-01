@@ -5,7 +5,7 @@
 ![Vite](https://img.shields.io/badge/Vite-5.x-646CFF)
 ![PrimeReact](https://img.shields.io/badge/PrimeReact-10.x-blue)
 
-Una aplicación web moderna y responsiva construida con React, TypeScript y PrimeReact. Diseñada para ofrecer una experiencia de usuario excepcional en la gestión y reserva de tours turísticos.
+Una aplicación web moderna y responsiva construida con React, TypeScript y PrimeReact. Diseñada para ofrecer una experiencia de usuario excepcional en la gestión.
 
 ## Características
 
