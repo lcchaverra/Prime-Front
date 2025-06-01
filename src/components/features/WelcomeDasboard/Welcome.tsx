@@ -32,7 +32,7 @@ const Welcome = () => {
     };
 
     return (
-        <div className="grid">
+        <div className="grid w-full">
         {/* Encabezado de bienvenida */}
         <div className="col-12">
             <div className="flex align-items-center justify-content-between mb-3">
