@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }:any) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   return (
-    <div className="min-h-screen w-full flex flex-column surface-ground">
+    <div className="min-h-screen w-screen flex flex-column surface-ground">
       <DashboardHeader onMenuToggle={() => setSidebarVisible(!sidebarVisible)} />
       
       <div className="flex flex-1 relative">
