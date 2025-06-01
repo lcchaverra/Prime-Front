@@ -15,11 +15,11 @@ import { getUsers, deleteUser as deleteUserService, saveUser } from "../../servi
 import { formatDate } from "../../utils/formatDate";
 import { useToast } from "../../hooks/useToast";
 import { ExportReports } from "../../utils/ExportReport";
-import { validateEmail } from "../../utils/ValidateEmail";
 import { useDebounce } from "../../hooks/useDebounce";
 
 // Interfaces
 import { type User, type UserForm } from "../../interface/Users";
+import { type ApiError } from "../../interface/Api";
 
 const Users: React.FC = () => {
   // Estados
@@ -28,12 +28,7 @@ const Users: React.FC = () => {
   const [saving, setSaving] = useState<boolean>(false);
   const [globalFilterValue, setGlobalFilterValue] = useState<string>("");
   const [userDialog, setUserDialog] = useState<boolean>(false);
-  const [user, setUser] = useState<UserForm>({ 
-    id: null, 
-    name: "", 
-    email: "", 
-    password: "" 
-  });
+  const [user, setUser] = useState<UserForm>({ id: null, name: "", email: "", password: ""  });
 
   // Hooks personalizados
   const { toast, showToast } = useToast();
@@ -41,6 +36,19 @@ const Users: React.FC = () => {
   
   // Referencias
   const dt = useRef<DataTable<User[]>>(null);
+
+    // Función para manejar errores de la API de forma inteligente
+  const handleApiError = (error: unknown, defaultMessage: string) => {
+    if (error && typeof error === 'object' && 'message' in error) {
+      const apiError = error as ApiError;
+      
+      // Usar directamente el mensaje del backend
+      showToast("error", "Error", apiError.message);
+    } else {
+      // Fallback para errores no estructurados
+      showToast("error", "Error", defaultMessage);
+    }
+  };
 
   // Funciones principales
   const fetchUsers = async (): Promise<void> => {
@@ -50,7 +58,7 @@ const Users: React.FC = () => {
       setUsers(data || []);
     } catch (error) {
       console.error("Error al obtener usuarios:", error);
-      showToast("error", "Error", "No se pudieron cargar los usuarios");
+      handleApiError(error, "No se pudieron cargar los usuarios");
     } finally {
       setLoading(false);
     }
@@ -68,11 +76,6 @@ const Users: React.FC = () => {
       return;
     }
 
-    if (validateEmail(user.email)) {
-      showToast("warn", "Advertencia", "El formato del email no es válido");
-      return;
-    }
-
     try {
       setSaving(true);
       const result = await saveUser(user);
@@ -81,13 +84,23 @@ const Users: React.FC = () => {
         showToast("success", "Éxito", `Usuario ${user.id ? "actualizado" : "creado"} correctamente`);
         setUserDialog(false);
         resetUserForm();
-        await fetchUsers(); // Recargar lista
-      } else {
-        showToast("error", "Error", "No se pudo guardar el usuario");
+        await fetchUsers();
       }
     } catch (error) {
       console.error("Error al guardar el usuario:", error);
-      showToast("error", "Error", "Error al guardar el usuario");
+
+      // Manejar específicamente el error de correo duplicado
+      if (error && typeof error === 'object' && 'message' in error) {
+        const apiError = error as ApiError;
+        showToast("error", "Error", apiError.message);
+        
+        // Opcional: manejar casos específicos
+        if (apiError.statusCode === 400 && apiError.message.includes("correo")) {
+          console.log("Error de correo duplicado detectado");
+        }
+      } else {
+        showToast("error", "Error", "Error al guardar el usuario");
+      }
     } finally {
       setSaving(false);
     }
@@ -101,16 +114,13 @@ const Users: React.FC = () => {
       accept: async () => {
         try {
           const result = await deleteUserService(userId);
-          
           if (result) {
             showToast("success", "Éxito", "Usuario eliminado correctamente");
-            await fetchUsers(); // Recargar lista
-          } else {
-            showToast("error", "Error", "No se pudo eliminar el usuario");
+            await fetchUsers(); 
           }
         } catch (error) {
           console.error("Error al eliminar usuario:", error);
-          showToast("error", "Error", "Error al eliminar el usuario");
+          handleApiError(error, "Error al eliminar el usuario");
         }
       },
       reject: () => {
@@ -130,12 +140,7 @@ const Users: React.FC = () => {
   };
 
   const openEditUserDialog = (userData: User): void => {
-    setUser({ 
-      id: userData.id, 
-      name: userData.name, 
-      email: userData.email, 
-      password: "" // No mostrar contraseña por seguridad
-    });
+    setUser({ id: userData.id, name: userData.name, email: userData.email, password: "" });
     setUserDialog(true);
   };
 
@@ -324,6 +329,7 @@ const Users: React.FC = () => {
               Correo Electrónico *
             </label>
             <InputText
+              keyfilter="email"
               id="email"
               type="email"
               value={user.email}
