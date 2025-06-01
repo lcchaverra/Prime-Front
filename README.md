@@ -1,4 +1,4 @@
-# React TypeScript Tourism Platform
+# React TypeScript Base plataform
 
 ![React](https://img.shields.io/badge/React-18.x-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
